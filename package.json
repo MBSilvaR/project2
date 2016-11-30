@@ -3,13 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-   "engines": {
+  "engines": {
     "node": "6.8.1"
   },
   "dependencies": {
+    "bcrypt": "^0.8.7",
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "fetch": "^1.1.0",
     "mustache-express": "^1.2.2",
-    "pg-promise": "^5.4.3"
+    "pg-promise": "^5.4.3",
+    "session": "^0.1.0"
   },
   "devDependencies": {},
   "scripts": {
