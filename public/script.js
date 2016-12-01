@@ -1,5 +1,4 @@
 $(document).ready(function() {
-      console.log("maybe");
 
 
       var getData = function(data) {
@@ -16,44 +15,47 @@ $(document).ready(function() {
           console.log(data)
           $('#results').empty()
           for(var i = 0; i < data.results.length; i++){
-            var content = $('<form action="/save" method="POST"><div id="content"></div></form>');
+
+
+            // also pull in article id, store it.
+            // when user saves an article only store the id of it.
+            // do not store all the data, that's a pita.
+            // when user tries to see his/her saved articles, pull all
+            // the unique article ids from the database- then goto the api and request
+            // the article info based on the id
+
+            var content = $('<div id="content"></div>');
             $('#results').append(content);
 
-            var button = $('<button type="submit">Save article</button>');
-            $('#content').append(button);
-
-            var div = $('<div id="content>"');
 
             var img = $('<img>');
             img.attr('src', data.results[i].media[0]["media-metadata"][2].url);
-            var imgInput = $('<input type="hidden" name="media" value="'+data.results[i].media[0]["media-metadata"][2].url+'">');
             $('#content').append(img);
 
             var title = $('<div>');
             title.text(data.results[i].title);
-            var titleInput = $('<input type="hidden" name="title" value="'+data.results[i].title+'">');
-            $('#content').append(title);
+            var titleInput = $('<form action="/save" method="POST"><input type="hidden" name="title" value="'+data.results[i].title+'"></form>');
+            $('#content').append(title).append(titleInput);
+
 
             var byline = $('<div>');
             byline.text(data.results[i].byline);
-            var bylineInput = $('<input type="hidden" name="byline" value="'+data.results[i].byline+'">');
             $('#content').append(byline);
 
             var publishedDate = $('<div>');
             publishedDate.text(data.results[i].published_date);
-            var publishedDateInput = $('<input type="hidden" name="published_date" value="'+data.results[i].published_date+'">');
             $('#content').append(publishedDate);
 
             var abstract = $('<div>');
             abstract.text(data.results[i].abstract);
-            var abstractInput = $('<input type="hidden" name="abstract" value="'+data.results[i].abstract+'">');
             $('#content').append(abstract);
 
             var link = $('<div>');
             link.text(data.results[i].url);
-            var linkInput = $('<input type="hidden" name="url" value="'+data.results[i].url+'">');
             $('#content').append(link);
 
+            var button = $('<button type="submit">Save article</button>');
+            titleInput.append(button);
 
           }
 
@@ -63,12 +65,30 @@ $(document).ready(function() {
       }
 
 
-      $('button').on('click', function() {
+      $('#search-button').on('click', function() {
         getData();
       })
 
-
-
+      var getContent = function(){
+        var titles = $('.article-title')
+        $.each(titles,function(index, val){
+          var title = $(val).text()
+          var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+          url += '?' + $.param({
+                                'api-key': "f34457fcc4a34e009ba12cb4bfd30877",
+                                'q': title
+                              })
+          $.ajax({
+            url: url,
+            method:"get"
+          }).done(function(data){
+            console.log('yay')
+            console.log(data)
+          })
+          console.log(title)
+        })
+      }
+      getContent()
 
   /* Slider */
 

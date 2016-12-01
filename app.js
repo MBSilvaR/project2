@@ -67,7 +67,7 @@ app.post('/subscribe', function(req, res) {
     db.none(
       "INSERT INTO users (email, password_digest) VALUES ($1, $2)", [data.email, hash]
     ).then(function() {
-      res.send('Welcome!');
+      res.render('home/index');
     })
   });
 })
@@ -83,7 +83,7 @@ app.post('/my_account', function(req, res) {
     bcrypt.compare(data.password, user.password_digest, function(err, cmp) {
       if (cmp) {
         req.session.user = user;
-        res.render('account_page/index.html', user);
+        res.redirect('/')
       } else {
         res.send('Email/Password not found.')
       }
@@ -106,14 +106,51 @@ app.get("/subscribe", function(req, res) {
 });
 
 app.get("/my_account", function(req, res) {
+  //get titles for user from database
+  //make sure they're logged in first though :P
+  //then pass the data forward to the front end
+  //put the titles in am object, then put that in the res.render
+
   res.render('my_account/index');
 });
 
-app.get("/account_page", function(req, res) {
-  res.render('account_page/index');
+app.get("/favorites", function(req, res) {
+  //   var userId;
+  //   var logged_in;
+  //   var email;
+  //  if (req.session.user) {
+  //   logged_in = true;
+  //   email = req.session.user.email;
+  //   userId = req.session.user.id;
+  // }
+   db.many("SELECT * FROM articles WHERE user_id = $1", [req.session.user.id]).then(function(data) {
+    var articleInfo = data;
+    console.log(articleInfo);
+    res.render('favorites/index', {'title': articleInfo})
+});
 });
 
-app.get("/save", function(req, res) {
-  res.render('account_page/index');
+
+app.post("/save", function(req, res) {
+  // get user's id,
+  var userId;
+  var logged_in;
+  var email;
+  if (req.session.user) {
+    logged_in = true;
+    email = req.session.user.email;
+    userId = req.session.user.id;
+  }
+
+  var title = req.body.title;
+  // var website = req.body.url;
+  // console.log(website);
+    db.none(
+      "INSERT INTO articles (title, user_id) VALUES ($1, $2)", [title, userId]
+    ).then(function() {
+      res.render('favorites/index');
+    })
+  // redirect to /favorites/user_id
+
 });
 

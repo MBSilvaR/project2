@@ -19,7 +19,12 @@
             <ul>
             <li class="options"><a href ="../search">Search</a></li>
             <li class="options"><a href = "../subscribe">Subscribe</a></li>
+            {{#logged_in}}
+            <li class="options"><a href ="../favorites">Favorites</a></li>
+            {{/logged_in}}
+            {{^logged_in}}
             <li class="options"><a href ="../my_account">My Account</a></li>
+            {{/logged_in}}
             </ul>
           </div>
         </div>
@@ -34,7 +39,7 @@
       </select>
       </div>
       <div class="six columns">
-        <button id = 'submit-button' class="u-full-width">Search</button>
+        <button id ='search-button' class="u-full-width">Search</button>
       </div>
         <div id="results">
         </div>
