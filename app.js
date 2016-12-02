@@ -167,13 +167,16 @@ app.post("/save", function(req, res) {
     email = req.session.user.email;
     userId = req.session.user.id;
   }
-
+  var data = {
+    "logged_in":logged_in,
+    "email":email
+  }
   var title = req.body.title;
   var webUrl = req.body.url;
   db.none(
     "INSERT INTO articles (title, user_id, url) VALUES ($1, $2, $3)", [title, userId, webUrl]
   ).then(function() {
-    res.render('favorites/index');
+    res.render('favorites/index',data);
   })
 
   app.get('/delete/:id', function(req, res) {
