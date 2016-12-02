@@ -183,9 +183,10 @@ app.post("/save", function(req, res) {
     console.log(req.params);
     db.none(
       "DELETE FROM articles WHERE id = $1", [req.params.id]
-    ).then(function() {
+    )
+    // .then(function() {
       res.redirect('/');
-    })
+    // })
 
   })
 
