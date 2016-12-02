@@ -31,6 +31,9 @@ a:hover {
   margin-left: 25%;
 }
 
+#content {
+  margin-bottom: 20px;
+}
 #search-button{
   margin-top: 3%;
 }
