@@ -1,12 +1,4 @@
 DROP TABLE IF EXISTS articles CASCADE;
-
-CREATE TABLE articles (
-  id              SERIAL PRIMARY KEY,
-  title           VARCHAR(255) NOT NULL,
-  url             VARCHAR(255) NOT NULL,
-  user_id         INTEGER REFERENCES users
-);
-
 DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE users (
@@ -14,6 +6,14 @@ CREATE TABLE users (
   email VARCHAR(255) UNIQUE,
   password_digest VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE articles (
+  id              SERIAL PRIMARY KEY,
+  title           VARCHAR NOT NULL,
+  url             VARCHAR NOT NULL,
+  user_id         INTEGER REFERENCES users
+);
+
 
 
 
