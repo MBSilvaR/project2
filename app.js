@@ -176,7 +176,7 @@ app.post("/save", function(req, res) {
   db.none(
     "INSERT INTO articles (title, user_id, url) VALUES ($1, $2, $3)", [title, userId, webUrl]
   ).then(function() {
-    res.render('favorites/index',data);
+    res.render('home/index', data);
   })
 
   app.get('/delete/:id', function(req, res) {
