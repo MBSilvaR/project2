@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const session = require('express-session');
 const port = process.env.PORT || 8080;
 const bcrypt = require('bcrypt');
-
+const methodoverride = require('method-override');
 
 app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(bodyParser.json());
+app.use(methodoverride('_method'));
 
 app.use(session({
   secret: 'testtesttest',
@@ -37,7 +38,6 @@ var db = pgp(process.env.DATABASE_URL || 'postgres://marcelasilva@localhost:5432
 app.listen(port)
 console.log("Server started on " + port);
 
-// ****
 
 app.get("/", function(req, res, next) {
   var logged_in;
@@ -52,7 +52,6 @@ app.get("/", function(req, res, next) {
     "logged_in": logged_in,
     "email": email
   }
-
   res.render('home/index', data);
 });
 
@@ -83,7 +82,7 @@ app.post('/my_account', function(req, res) {
     bcrypt.compare(data.password, user.password_digest, function(err, cmp) {
       if (cmp) {
         req.session.user = user;
-        res.redirect('/')
+        res.redirect('/home')
       } else {
         res.send('Email/Password not found.')
       }
@@ -91,48 +90,75 @@ app.post('/my_account', function(req, res) {
   });
 });
 
-// *****
 
 app.get("/home", function(req, res, next) {
-  res.render('home/index');
+  var logged_in;
+  var email;
+  if (req.session.user) {
+    logged_in = true;
+    email = req.session.user.email;
+  }
+
+  var data = {
+    "logged_in": logged_in,
+    "email": email
+  }
+  res.render('home/index', data);
+
 });
 
 app.get("/search", function(req, res, next) {
-  res.render('search/index');
+    if (req.session.user) {
+    var logged_in = true;
+    var email = req.session.user.email;
+  }
+
+  var data = {
+    "logged_in": logged_in,
+    "email": email
+  }
+  res.render('search/index', data);
+
 });
 
 app.get("/subscribe", function(req, res) {
-  res.render('subscribe/index');
+  if (req.session.user) {
+    var logged_in = true;
+    var email = req.session.user.email;
+  }
+
+  var data = {
+    "logged_in": logged_in,
+    "email": email
+  }
+  res.render('subscribe/index', data);
 });
 
 app.get("/my_account", function(req, res) {
-  //get titles for user from database
-  //make sure they're logged in first though :P
-  //then pass the data forward to the front end
-  //put the titles in am object, then put that in the res.render
-
   res.render('my_account/index');
 });
 
 app.get("/favorites", function(req, res) {
-  //   var userId;
-  //   var logged_in;
-  //   var email;
-  //  if (req.session.user) {
-  //   logged_in = true;
-  //   email = req.session.user.email;
-  //   userId = req.session.user.id;
-  // }
-   db.many("SELECT * FROM articles WHERE user_id = $1", [req.session.user.id]).then(function(data) {
-    var articleInfo = data;
-    console.log(articleInfo);
-    res.render('favorites/index', {'title': articleInfo})
-});
-});
+      if (req.session.user) {
+    var logged_in = true;
+    var email = req.session.user.email;
+  }
 
+  var logInfo = {
+    "logged_in": logged_in,
+    "email": email
+  }
+  db.many("SELECT * FROM articles WHERE user_id = $1", [req.session.user.id]).then(function(data) {
+    var articleInfo = data;
+    var stuff = {
+      'data':logInfo,
+      'title': articleInfo
+    }
+    res.render('favorites/index', stuff)
+  });
+});
 
 app.post("/save", function(req, res) {
-  // get user's id,
   var userId;
   var logged_in;
   var email;
@@ -143,14 +169,22 @@ app.post("/save", function(req, res) {
   }
 
   var title = req.body.title;
-  // var website = req.body.url;
-  // console.log(website);
-    db.none(
-      "INSERT INTO articles (title, user_id) VALUES ($1, $2)", [title, userId]
-    ).then(function() {
-      res.render('favorites/index');
-    })
-  // redirect to /favorites/user_id
+  var webUrl = req.body.url;
+  db.none(
+    "INSERT INTO articles (title, user_id, url) VALUES ($1, $2, $3)", [title, userId, webUrl]
+  ).then(function() {
+    res.render('favorites/index');
+  })
+
+app.get('/delete/:id', function(req, res){
+  console.log(req.params);
+  db.none(
+    "DELETE FROM articles WHERE id = $1",
+    [req.params.id]
+  ).then(function(){
+    res.redirect('/');
+  })
+
+})
 
 });
-

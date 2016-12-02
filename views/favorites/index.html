@@ -20,28 +20,23 @@
             <ul>
             <li class="options"><a href ="../search">Search</a></li>
             <li class="options"><a href = "../subscribe">Subscribe</a></li>
-            {{#logged_in}}
+            {{#data.logged_in}}
             <li class="options"><a href ="../favorites">Favorites</a></li>
-            {{/logged_in}}
-            {{^logged_in}}
+            {{/data.logged_in}}
+            {{^data.logged_in}}
             <li class="options"><a href ="../my_account">My Account</a></li>
-            {{/logged_in}}
+            {{/data.logged_in}}
             </ul>
           </div>
         </div>
       </div>
       {{#title}}
       <p class = "article-title">{{title}}</p>
+      <a class ="fav-link" href="{{url}}" title="">Click here to read</a>
+      <button class="delete" data-value = "{{id}}">Delete</button>
       {{/title}}
-      <div id="favorite"></div>
-      <!-- <div class="slider_container">
-        <ul class="slider clearfix">
-          <li class="slide-1"></li>
-          <li class="slide-2"></li>
-          <li class="slide-3"></li>
-          <li class="slide-4"></li>
-        </ul>
-    </div> -->
+
+      <div id="favorites"></div>
   </div>
 
 <script src="script.js"></script>

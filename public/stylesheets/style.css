@@ -1,14 +1,15 @@
 body {
   font-family: "Futura", sans-serif;
-  background-image: url(/img/jorinde_voigt.png);
 }
+
+/* #main {
+  background: url(../img/new-york-times-building-getty-images.jpg)
+} */
 
 .container {
   position: relative;
   width: 100%;
-  /* max-width: 960px; */
   margin: 0 auto;
-/*   padding: 0 auto; */
   box-sizing: border-box;
 }
 .column,
@@ -23,9 +24,18 @@ body {
   color: black;
 }
 
-#options,#select, #submit-button {
+#results {
+  margin-top: 3%;
+  margin-left: 25%;
+}
+
+#search-button{
+  margin-top: 3%;
+}
+
+#options,#select, #submit-button, #search-button {
   font-size: 12px;
-   font-family: Futura, sans-serif;
+  font-family: Futura, sans-serif;
 }
 
 a {
@@ -53,13 +63,12 @@ ul {
   overflow: hidden;
   height: 100%;
   margin: 0 auto;
-/*   border: 1px solid #000; */
+
 }
 
 ul.slider {}
 
 ul.slider li {
- /*  display: block; */
   height: 600px;
   width: 1000px;
   margin: 0 auto;

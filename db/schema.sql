@@ -2,7 +2,8 @@ DROP TABLE IF EXISTS articles CASCADE;
 
 CREATE TABLE articles (
   id              SERIAL PRIMARY KEY,
-  title             VARCHAR(255) NOT NULL,
+  title           VARCHAR(255) NOT NULL,
+  url             VARCHAR(255) NOT NULL,
   user_id         INTEGER REFERENCES users
 );
 

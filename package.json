@@ -12,6 +12,7 @@
     "express": "^4.14.0",
     "express-session": "^1.14.2",
     "fetch": "^1.1.0",
+    "method-override": "^2.3.7",
     "mustache-express": "^1.2.2",
     "pg-promise": "^5.4.3",
     "session": "^0.1.0"
