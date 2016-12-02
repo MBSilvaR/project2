@@ -2,10 +2,6 @@ body {
   font-family: "Futura", sans-serif;
 }
 
-/* #main {
-  background: url(../img/new-york-times-building-getty-images.jpg)
-} */
-
 .container {
   position: relative;
   width: 100%;
@@ -18,10 +14,16 @@ body {
   float: left;
   box-sizing: border-box; }
 
+a:hover {
+  text-decoration: underline;
+
+}
+
 #title {
   font-size: 26px;
   margin: 10px 0 80px 0;
   color: black;
+  text-decoration: none;
 }
 
 #results {
@@ -44,6 +46,7 @@ a {
   color: black;
 }
 
+
 .link {
   color:  #CE7082;
 }
@@ -58,40 +61,4 @@ ul {
   list-style: none;
 }
 
-
-.slider_container {
-  overflow: hidden;
-  height: 100%;
-  margin: 0 auto;
-
-}
-
-ul.slider {}
-
-ul.slider li {
-  height: 600px;
-  width: 1000px;
-  margin: 0 auto;
-  float: left;
-}
-
-ul.slider li.slide-1 {
-  background: url(../img/jorinde_voigt.png) 0 0 no-repeat;
-  background-size: cover;
-}
-
-ul.slider li.slide-2 {
-  background: url(../img/jim_shaw.png) 0 0 no-repeat;
-  background-size: cover;
-}
-
-ul.slider li.slide-3 {
-  background: url(../img/eva_hesse.png) 0 0 no-repeat;
-  background-size: cover;
-}
-
-ul.slider li.slide-4 {
-  background: url(../img/rosemarie_trockel.png) 0 0 no-repeat;
-  background-size: cover;
-}
 

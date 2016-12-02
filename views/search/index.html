@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Project 2</title>
@@ -9,28 +10,28 @@
   <link href="stylesheets/style.css" rel="stylesheet" type="text/css">
 
 </head>
+
 <body>
 
   <div class="container">
-      <div class="row">
-        <div class="one-fourth column" style="margin-top:0%">
-          <div id="title"><a href ="../home">Art Source</a></div>
-          <div id="options">
-            <ul>
-            <li class="options"><a href ="../search">Search</a></li>
-            <li class="options"><a href = "../subscribe">Subscribe</a></li>
+    <div class="row">
+      <div class="one-fourth column" style="margin-top:0%">
+        <div id="title"><a href="../home">Art Source</a></div>
+        <div id="options">
+          <ul>
+            <li class="options"><a href="../search">Search</a></li>
+            <li class="options"><a href="../subscribe">Subscribe</a></li>
             {{#logged_in}}
-            <li class="options"><a href ="../favorites">Favorites</a></li>
+            <li class="options"><a href="../favorites">Favorites</a></li>
+            {{/logged_in}} {{^logged_in}}
+            <li class="options"><a href="../my_account">My Account</a></li>
             {{/logged_in}}
-            {{^logged_in}}
-            <li class="options"><a href ="../my_account">My Account</a></li>
-            {{/logged_in}}
-            </ul>
-          </div>
+          </ul>
         </div>
       </div>
-      <div id="search-bar" class="row">
-        <div class="six columns">
+    </div>
+    <div id="search-bar" class="row">
+      <div class="six columns">
         <select class="u-full-width" id="select">
         <option value="">Please select...</option>
         <option value="Arts">Arts</option>
@@ -39,13 +40,14 @@
       </select>
       </div>
       <div class="six columns">
-        <button id ='search-button' class="u-full-width">Search</button>
+        <button id='search-button' class="u-full-width">Search</button>
       </div><br><br>
-        <div id="results">
-        </div><br><br>
-      </div>
+      <div id="results">
+      </div><br><br>
+    </div>
   </div>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>

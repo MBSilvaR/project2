@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Project 2</title>
@@ -9,30 +10,30 @@
   <link href="stylesheets/style.css" rel="stylesheet" type="text/css">
 
 </head>
+
 <body>
-<!-- Welcome back{{user}}! -->
   <div class="container">
 
-      <div class="row">
-        <div class="one-fourth column" style="margin-top:0%">
-          <div id="title"><a href ="../home">Art Source</a></div>
-          <div id="options">
-           <ul>
-            <li class="options"><a href ="../search">Search</a></li>
-            <li class="options"><a href = "../subscribe">Subscribe</a></li>
+    <div class="row">
+      <div class="one-fourth column" style="margin-top:0%">
+        <div id="title"><a href="../home">Art Source</a></div>
+        <div id="options">
+          <ul>
+            <li class="options"><a href="../search">Search</a></li>
+            <li class="options"><a href="../subscribe">Subscribe</a></li>
             {{#logged_in}}
-            <li class="options"><a href ="../favorites">Favorites</a></li>
+            <li class="options"><a href="../favorites">Favorites</a></li>
+            {{/logged_in}} {{^logged_in}}
+            <li class="options"><a href="../my_account">My Account</a></li>
             {{/logged_in}}
-            {{^logged_in}}
-            <li class="options"><a href ="../my_account">My Account</a></li>
-            {{/logged_in}}
-            </ul>
-          </div>
+          </ul>
         </div>
       </div>
+    </div>
     <p>You are now logged in. To see your saved articles click <a href="../favorites" class="link">here.</a></p>
   </div>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>

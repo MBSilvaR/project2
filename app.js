@@ -108,7 +108,7 @@ app.get("/home", function(req, res, next) {
 });
 
 app.get("/search", function(req, res, next) {
-    if (req.session.user) {
+  if (req.session.user) {
     var logged_in = true;
     var email = req.session.user.email;
   }
@@ -139,7 +139,7 @@ app.get("/my_account", function(req, res) {
 });
 
 app.get("/favorites", function(req, res) {
-      if (req.session.user) {
+  if (req.session.user) {
     var logged_in = true;
     var email = req.session.user.email;
   }
@@ -148,10 +148,10 @@ app.get("/favorites", function(req, res) {
     "logged_in": logged_in,
     "email": email
   }
-  db.many("SELECT * FROM articles WHERE user_id = $1", [req.session.user.id]).then(function(data) {
+  db.any("SELECT * FROM articles WHERE user_id = $1", [req.session.user.id]).then(function(data) {
     var articleInfo = data;
     var stuff = {
-      'data':logInfo,
+      'data': logInfo,
       'title': articleInfo
     }
     res.render('favorites/index', stuff)
@@ -176,15 +176,14 @@ app.post("/save", function(req, res) {
     res.render('favorites/index');
   })
 
-app.get('/delete/:id', function(req, res){
-  console.log(req.params);
-  db.none(
-    "DELETE FROM articles WHERE id = $1",
-    [req.params.id]
-  ).then(function(){
-    res.redirect('/');
-  })
+  app.get('/delete/:id', function(req, res) {
+    console.log(req.params);
+    db.none(
+      "DELETE FROM articles WHERE id = $1", [req.params.id]
+    ).then(function() {
+      res.redirect('/');
+    })
 
-})
+  })
 
 });

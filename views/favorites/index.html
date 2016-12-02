@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Project 2</title>
@@ -9,36 +10,36 @@
   <link href="stylesheets/style.css" rel="stylesheet" type="text/css">
 
 </head>
+
 <body>
 
   <div class="container">
 
-      <div class="row">
-        <div class="one-fourth column" style="margin-top:0%">
-          <div id="title"><a href ="../home">Art Source</a></div>
-          <div id="options">
-            <ul>
-            <li class="options"><a href ="../search">Search</a></li>
-            <li class="options"><a href = "../subscribe">Subscribe</a></li>
+    <div class="row">
+      <div class="one-fourth column" style="margin-top:0%">
+        <div id="title"><a href="../home">Art Source</a></div>
+        <div id="options">
+          <ul>
+            <li class="options"><a href="../search">Search</a></li>
+            <li class="options"><a href="../subscribe">Subscribe</a></li>
             {{#data.logged_in}}
-            <li class="options"><a href ="../favorites">Favorites</a></li>
+            <li class="options"><a href="../favorites">Favorites</a></li>
+            {{/data.logged_in}} {{^data.logged_in}}
+            <li class="options"><a href="../my_account">My Account</a></li>
             {{/data.logged_in}}
-            {{^data.logged_in}}
-            <li class="options"><a href ="../my_account">My Account</a></li>
-            {{/data.logged_in}}
-            </ul>
-          </div>
+          </ul>
         </div>
       </div>
-      {{#title}}
-      <p class = "article-title">{{title}}</p>
-      <a class ="fav-link" href="{{url}}" title="">Click here to read</a>
-      <button class="delete" data-value = "{{id}}">Delete</button>
-      {{/title}}
+    </div>
+    {{#title}}
+    <p class="article-title">{{title}}</p>
+    <a class="fav-link" href="{{url}}" title="">Click here to read</a>
+    <button class="delete" data-value="{{id}}">Delete</button> {{/title}}
 
-      <div id="favorites"></div>
+    <div id="favorites"></div>
   </div>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>

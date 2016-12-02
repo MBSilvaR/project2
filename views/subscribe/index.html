@@ -20,15 +20,14 @@
         <div id="title"><a href="../home">Art Source</a></div>
         <div id="options">
           <ul>
-            <li class="options"><a href ="../search">Search</a></li>
-            <li class="options"><a href = "../subscribe">Subscribe</a></li>
+            <li class="options"><a href="../search">Search</a></li>
+            <li class="options"><a href="../subscribe">Subscribe</a></li>
             {{#logged_in}}
-            <li class="options"><a href ="../favorites">Favorites</a></li>
+            <li class="options"><a href="../favorites">Favorites</a></li>
+            {{/logged_in}} {{^logged_in}}
+            <li class="options"><a href="../my_account">My Account</a></li>
             {{/logged_in}}
-            {{^logged_in}}
-            <li class="options"><a href ="../my_account">My Account</a></li>
-            {{/logged_in}}
-            </ul>
+          </ul>
         </div>
       </div>
     </div>
